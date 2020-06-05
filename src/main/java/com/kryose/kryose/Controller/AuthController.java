@@ -31,7 +31,7 @@ public class AuthController {
         return "home";
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String Register(@RequestBody CrmUser theCrmUser){
         String userName = theCrmUser.getUserName();
 
