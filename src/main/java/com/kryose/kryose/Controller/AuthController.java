@@ -44,7 +44,7 @@ public class AuthController {
     @GetMapping("getuser")
     public User getUser(){
 
-        User existing = userService.findByUserName("raj");
+        User existing = userService.findByUserName("saurabh");
 
         return existing;
 
