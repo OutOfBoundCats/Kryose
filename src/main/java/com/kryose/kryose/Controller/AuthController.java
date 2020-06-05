@@ -7,6 +7,9 @@ import com.kryose.kryose.Entity.CrmUser;
 import com.kryose.kryose.Entity.User;
 import com.kryose.kryose.Service.UserServiceImpl;
 import com.kryose.kryose.Util.JwtUtil;
+import lombok.extern.java.Log;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,8 +18,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
+@RequestMapping("/api")
 public class AuthController {
+
+    Logger logger=LoggerFactory.getLogger(AuthController.class);
+
     @Autowired
     UserServiceImpl userService;
 
@@ -41,11 +50,11 @@ public class AuthController {
 
     }
 
-    @GetMapping("getuser")
+    @GetMapping("/getuser")
     public User getUser(){
 
         User existing = userService.findByUserName("saurabh");
-
+        logger.error("Hi ");
         return existing;
 
     }
