@@ -32,7 +32,7 @@ public class CreditResource {
     @Column(name = "username")
     private String username;
 
-    @OneToMany(mappedBy = "myCreditResource")
+    @OneToMany(mappedBy = "myCreditResource",fetch = FetchType.LAZY)
     private List<UserDetail> userDetailList;
 
 

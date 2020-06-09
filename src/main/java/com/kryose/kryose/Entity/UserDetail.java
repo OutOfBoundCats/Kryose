@@ -20,10 +20,10 @@ public class UserDetail {
     @JoinColumn(name = "resourceID")
     private CreditResource myCreditResource;
 
-    @OneToMany(mappedBy = "myUserDetail")
+    @OneToMany(mappedBy = "myUserDetail",fetch = FetchType.LAZY)
     private List<PaymentTransactions> myPaymentTransactions;
 
-    @OneToMany(mappedBy = "myUserDetails")
+    @OneToMany(mappedBy = "myUserDetails",fetch = FetchType.LAZY)
     private  List<ApiTransactions> ApiTransactions;
 
 
