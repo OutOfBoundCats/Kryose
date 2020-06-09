@@ -72,7 +72,6 @@ public class ApiServices {
 
         }
 
-
         //end
         //upload image to s3 bucket then pass url to flask app for processing
 
