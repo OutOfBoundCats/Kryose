@@ -44,7 +44,13 @@ public class AuthController {
     public String Register(@RequestBody CrmUser theCrmUser){
         String userName = theCrmUser.getUserName();
 
-        userService.save(theCrmUser);
+        if(userService.findByUserName(userName) !=null){
+            return "user already exists";
+        }else{
+            userService.save(theCrmUser);
+        }
+
+
 
         return "registration-confirmation";
 
