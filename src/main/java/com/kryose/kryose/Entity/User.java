@@ -38,6 +38,13 @@ public class User {
     @JoinColumn(name = "userDetailID")
     private UserDetail myUserDetail;
 
+    public UserDetail getMyUserDetail() {
+        return myUserDetail;
+    }
+
+    public void setMyUserDetail(UserDetail myUserDetail) {
+        this.myUserDetail = myUserDetail;
+    }
 
     public User() {
     }

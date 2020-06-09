@@ -36,4 +36,5 @@ public class CreditResource {
     private List<UserDetail> userDetailList;
 
 
+
 }
