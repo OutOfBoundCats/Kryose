@@ -45,9 +45,7 @@ public class ApiServices {
         fout.close();
         //end
         //upload image to s3 bucket then pass url to flask app for processing
-
         return "url of return image";
-
     }
 
     @PostMapping(value = "/multi_ml_process" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -71,6 +69,8 @@ public class ApiServices {
             fout.close();
 
         }
+
+
 
         //end
         //upload image to s3 bucket then pass url to flask app for processing

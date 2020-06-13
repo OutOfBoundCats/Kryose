@@ -1,0 +1,63 @@
+SELECT * FROM kryose_02.user;
+
+
+USE `kryose_02`;
+
+ALTER TABLE user
+ADD `userDetailID` int(11),
+ADD foreign key(userDetailID) references userDetails(id);
+
+ALTER TABLE resource
+ADD `username` varchar(50);
+
+ALTER TABLE userDetails DROP FOREIGN KEY userID;
+
+DROP TABLE IF EXISTS `resource`;
+
+CREATE TABLE `resource` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `credits` int(11) default 0,
+  `username` varchar(50) NOT NULL unique,
+  `startDate` datetime,
+  `endDate` datetime ,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `userDetails`;
+CREATE TABLE `userDetails` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+    `userID` int(11) NOT NULL,
+	 `username` varchar(50) NOT NULL unique,
+     `resourceID` int(11) NOT NULL,
+     PRIMARY KEY (`id`),
+   FOREIGN KEY (resourceID) REFERENCES resource (id),
+   FOREIGN KEY (userID) REFERENCES user (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `transactions`;
+CREATE TABLE `transactions` (
+	`id` int(11) PRIMARY KEY,
+    `userDetailsID` int(11),
+	 `username` varchar(50) NOT NULL,
+     `transactionDate` datetime,
+     `endDate` datetime,
+     `amount` int(11) NOT NULL,
+     `info` varchar(50) NOT NULL,
+   FOREIGN KEY (userDetailsID) REFERENCES userDetails(id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `APItransactions`;
+CREATE TABLE `APItransactions` (
+	`id` int(11) PRIMARY KEY,
+    `userDetailsID` int(11),
+	 `username` varchar(50) NOT NULL,
+     `transactionDate` datetime,
+     `creditDeducted` int(11) NOT NULL,
+     `info` varchar(50) NOT NULL,
+   FOREIGN KEY (userDetailsID) REFERENCES userDetails(id)
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+

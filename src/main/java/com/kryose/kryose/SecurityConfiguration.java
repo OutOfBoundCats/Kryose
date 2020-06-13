@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 .authorizeRequests().antMatchers("/api/authenticate").permitAll().
                 antMatchers("/api/register").permitAll().
-                antMatchers("/api/getuser").hasAnyRole("ROLES_ADMIN").
+                antMatchers("/api/getuser").hasAnyRole("ROLE_ADMIN").
                 anyRequest().authenticated().and().
                 exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

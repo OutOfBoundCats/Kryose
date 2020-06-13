@@ -1,10 +1,15 @@
 package com.kryose.kryose.Service;
 
+import com.kryose.kryose.Controller.AuthController;
 import com.kryose.kryose.Dao.RoleDao;
 import com.kryose.kryose.Dao.UserDao;
 import com.kryose.kryose.Entity.CrmUser;
+import com.kryose.kryose.Entity.MyUserDetails;
 import com.kryose.kryose.Entity.Role;
 import com.kryose.kryose.Entity.User;
+import com.kryose.kryose.Repository.UserRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +27,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     // need to inject user dao
+    Logger logger= LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private UserDao userDao;
 
@@ -31,10 +37,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRepo myUserRepo;
+
+
     @Override
     @Transactional
     public User findByUserName(String userName) {
         // check the database if the user already exists
+        logger.error("in findUserByUserName");
         return userDao.findUserByUsername(userName);
     }
 
@@ -42,6 +53,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();
+        MyUserDetails myUSerDetails;
         // assign user details to the user object
         user.setUserName(crmUser.getUserName());
         user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
@@ -50,8 +62,15 @@ public class UserServiceImpl implements UserService {
         user.setEmail(crmUser.getEmail());
 
         // give user default role of "employee"
-        user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_EMPLOYEE")));
+        user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_ADMIN")));
+        //set MyUserDetails
+        myUSerDetails=new MyUserDetails(crmUser.getUserName());
+        logger.error(String.valueOf(myUSerDetails));
+        user.setMyUserDetauilsID(myUSerDetails);
+        myUSerDetails.setMyuser(user);
 
+
+        logger.error("calling DAO save method");
         // save user in the database
         userDao.save(user);
     }

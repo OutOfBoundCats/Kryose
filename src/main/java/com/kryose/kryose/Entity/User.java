@@ -34,16 +34,19 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinColumn(name = "userDetailID")
-    private UserDetail myUserDetail;
 
-    public UserDetail getMyUserDetail() {
-        return myUserDetail;
+
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_details_id")
+    private MyUserDetails myUserDetauilsID;
+
+
+    public MyUserDetails getMyUserDetauilsID() {
+        return myUserDetauilsID;
     }
 
-    public void setMyUserDetail(UserDetail myUserDetail) {
-        this.myUserDetail = myUserDetail;
+    public void setMyUserDetauilsID(MyUserDetails myUserDetauilsID) {
+        this.myUserDetauilsID = myUserDetauilsID;
     }
 
     public User() {

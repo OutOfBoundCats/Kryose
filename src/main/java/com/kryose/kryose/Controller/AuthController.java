@@ -5,9 +5,9 @@ import com.kryose.kryose.Entity.AuthRequest;
 import com.kryose.kryose.Entity.AuthResponse;
 import com.kryose.kryose.Entity.CrmUser;
 import com.kryose.kryose.Entity.User;
+import com.kryose.kryose.Repository.UserRepo;
 import com.kryose.kryose.Service.UserServiceImpl;
 import com.kryose.kryose.Util.JwtUtil;
-import lombok.extern.java.Log;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,9 @@ public class AuthController {
     UserServiceImpl userService;
 
     @Autowired
+    UserRepo myUserRepo;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -43,16 +46,26 @@ public class AuthController {
     @PostMapping("/register")
     public String Register(@RequestBody CrmUser theCrmUser){
         String userName = theCrmUser.getUserName();
-
+        logger.error(String.valueOf(theCrmUser));
         if(userService.findByUserName(userName) !=null){
             return "user already exists";
         }else{
+            logger.error("calling userService.save method");
             userService.save(theCrmUser);
         }
 
 
+//            logger.error("user does not exist");
+//            logger.error("calling userService.save method");
+//            userService.save(theCrmUser);
 
-        return "registration-confirmation";
+
+
+
+
+
+
+            return "registration-confirmation";
 
     }
 
