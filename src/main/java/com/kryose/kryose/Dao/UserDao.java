@@ -66,7 +66,7 @@ public class UserDao {
     }
 
     public MyUserDetails getMyuserDetailsByUsername(String username){
-
+        //return MyUserDetails object from datatbase based on username
         MyUserDetails myUserDetails = null;
         Session currectSession=myEntityManager.unwrap(Session.class);
         Query<MyUserDetails> theQuery = currectSession.createQuery("from MyUserDetails where userName=:uName", MyUserDetails.class);
@@ -78,7 +78,6 @@ public class UserDao {
         } catch (Exception e) {
             myUser = null;
         }
-
 
         return myUserDetails;
     }

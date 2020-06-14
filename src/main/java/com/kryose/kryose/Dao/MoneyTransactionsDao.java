@@ -24,19 +24,21 @@ public class MoneyTransactionsDao {
     UserServiceImpl myUserServiceImp;
 
     public String makePayment(MoneyTransactions myMoneyTransaction){
-
+        //saves MoneyTransaction object in database
         MyUserDetails myUserDetails;
+        //get session from entitymanager
         Session currectSession=myEntityManager.unwrap(Session.class);
-        //currectSession.save(myMoneyTransaction);
-
+        //get MyUserDetails from UserServiceImp
         myUserDetails=myUserServiceImp.getMyuserDetailsByUsername(myMoneyTransaction.getUsername());
         logger.error(String.valueOf(myUserDetails));
         logger.error(String.valueOf(myUserDetails.getMyResource()));
-
+        //set MyUserDetails of MoneyTransactions
         myMoneyTransaction.setUserDetailsID(myUserDetails);
         logger.error(String.valueOf(myMoneyTransaction));
+        //Add MoneyTransactions to MyUserDetails
         myUserDetails.addMyMoneyTransactions(myMoneyTransaction);
         logger.error(String.valueOf(myUserDetails.getMyMoneyTransactions()));
+        //SAVE transaction
         currectSession.save(myMoneyTransaction);
 
         return null;
