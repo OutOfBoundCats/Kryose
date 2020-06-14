@@ -19,19 +19,32 @@ public class MyUserDetails {
     @OneToOne(mappedBy = "myUserDetauilsID",fetch = FetchType.LAZY)
     private User myuser;
 
-    public User getMyuser() {
-        return myuser;
-    }
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinColumn(name = "resource_id")
+    private Resource myResource;
 
-    public void setMyuser(User myuser) {
-        this.myuser = myuser;
-    }
+
 
     public MyUserDetails(String userName) {
         this.userName = userName;
     }
 
     public MyUserDetails() {
+    }
+    public User getMyuser() {
+        return myuser;
+    }
+
+    public Resource getMyResource() {
+        return myResource;
+    }
+
+    public void setMyResource(Resource myResource) {
+        this.myResource = myResource;
+    }
+
+    public void setMyuser(User myuser) {
+        this.myuser = myuser;
     }
 
     public String getUserName() {

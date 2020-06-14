@@ -55,17 +55,15 @@ public class AuthController {
         }
 
 
-//            logger.error("user does not exist");
-//            logger.error("calling userService.save method");
-//            userService.save(theCrmUser);
-
-
-
-
-
-
-
             return "registration-confirmation";
+
+    }
+    @PostMapping("/delete")
+    public String Delete(@RequestBody CrmUser theCrmUser){
+        String userName = theCrmUser.getUserName();
+        userService.deleteUserByUsername(userName);
+
+        return "registration-confirmation";
 
     }
 

@@ -2,7 +2,6 @@ package com.kryose.kryose.Dao;
 
 
 import com.kryose.kryose.Controller.AuthController;
-import com.kryose.kryose.Entity.MyUserDetails;
 import com.kryose.kryose.Entity.User;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -44,6 +43,25 @@ public class UserDao {
         logger.error("saving user in dao");
         // create the user ... finally LOL
         currectSession.saveOrUpdate(theUser);
+    }
+
+    public User deleteUser(String theUser) {
+
+        logger.error("in dao delete method");
+        logger.error("deleting user in dao");
+        Session currectSession=myEntityManager.unwrap(Session.class);
+        Query<User> theQuery = currectSession.createQuery("from User where userName=:uName", User.class);
+        theQuery.setParameter("uName", theUser);
+        User myUser = null;
+        try {
+            logger.error("executing delete query");
+            myUser = theQuery.getSingleResult();
+        } catch (Exception e) {
+            myUser = null;
+        }
+        currectSession.delete(myUser);
+
+        return myUser;
     }
 
 

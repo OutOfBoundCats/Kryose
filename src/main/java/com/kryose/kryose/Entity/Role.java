@@ -1,12 +1,9 @@
 package com.kryose.kryose.Entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "role")
@@ -19,6 +16,14 @@ public class Role {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name="users_roles",
+            joinColumns=@JoinColumn(name="role_id"),
+            inverseJoinColumns=@JoinColumn(name="user_id")
+    )
+    private List<User> users;
 
     public Role() {
     }

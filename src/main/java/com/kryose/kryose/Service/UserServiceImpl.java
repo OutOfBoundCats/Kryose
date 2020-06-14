@@ -3,10 +3,7 @@ package com.kryose.kryose.Service;
 import com.kryose.kryose.Controller.AuthController;
 import com.kryose.kryose.Dao.RoleDao;
 import com.kryose.kryose.Dao.UserDao;
-import com.kryose.kryose.Entity.CrmUser;
-import com.kryose.kryose.Entity.MyUserDetails;
-import com.kryose.kryose.Entity.Role;
-import com.kryose.kryose.Entity.User;
+import com.kryose.kryose.Entity.*;
 import com.kryose.kryose.Repository.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,11 +46,19 @@ public class UserServiceImpl implements UserService {
         return userDao.findUserByUsername(userName);
     }
 
+    @Transactional
+    public User deleteUserByUsername(String userName) {
+        // check the database if the user already exists
+        logger.error("in deleteUserByUserName");
+        return userDao.deleteUser(userName);
+    }
+
 
     @Transactional
     public void save(CrmUser crmUser) {
         User user = new User();
         MyUserDetails myUSerDetails;
+        Resource myResource;
         // assign user details to the user object
         user.setUserName(crmUser.getUserName());
         user.setPassword(passwordEncoder.encode(crmUser.getPassword()));
@@ -68,6 +73,10 @@ public class UserServiceImpl implements UserService {
         logger.error(String.valueOf(myUSerDetails));
         user.setMyUserDetauilsID(myUSerDetails);
         myUSerDetails.setMyuser(user);
+
+        //set Resource Details
+        myResource=new Resource( Long.valueOf(0),crmUser.getUserName(),null,null,"Welcome",Long.valueOf(0),Long.valueOf(0),Long.valueOf(0));
+        myUSerDetails.setMyResource(myResource);
 
 
         logger.error("calling DAO save method");
