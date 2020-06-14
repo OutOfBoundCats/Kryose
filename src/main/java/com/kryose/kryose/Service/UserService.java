@@ -1,6 +1,6 @@
 package com.kryose.kryose.Service;
 
-import com.kryose.kryose.Entity.CrmUser;
+import com.kryose.kryose.Entity.In_Out.CrmUser;
 import com.kryose.kryose.Entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 

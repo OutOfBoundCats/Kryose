@@ -3,7 +3,7 @@ package com.kryose.kryose.Controller;
 
 import com.kryose.kryose.Entity.AuthRequest;
 import com.kryose.kryose.Entity.AuthResponse;
-import com.kryose.kryose.Entity.CrmUser;
+import com.kryose.kryose.Entity.In_Out.CrmUser;
 import com.kryose.kryose.Entity.User;
 import com.kryose.kryose.Repository.UserRepo;
 import com.kryose.kryose.Service.UserServiceImpl;

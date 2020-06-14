@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @PropertySource("classpath:application.properties")
-public class Razorpay_Payment {
+public class Razorpay_Payment implements PaymentInterface{
 
+    //https://razorpay.com/docs/server-integration/java/usage/
     @Autowired
     private Environment env;
 
@@ -20,6 +21,17 @@ public class Razorpay_Payment {
 
     public String getRazorpay_key_id() {
         return razorpay_key_id;
+    }
+
+
+    @Override
+    public String make_Payment() {
+        return null;
+    }
+
+    @Override
+    public String start_subscription() {
+        return null;
     }
 
 

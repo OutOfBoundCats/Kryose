@@ -1,9 +1,11 @@
 package com.kryose.kryose.Service;
 
 import com.kryose.kryose.Controller.AuthController;
+import com.kryose.kryose.Dao.MoneyTransactionsDao;
 import com.kryose.kryose.Dao.RoleDao;
 import com.kryose.kryose.Dao.UserDao;
 import com.kryose.kryose.Entity.*;
+import com.kryose.kryose.Entity.In_Out.CrmUser;
 import com.kryose.kryose.Repository.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,16 +29,14 @@ public class UserServiceImpl implements UserService {
     Logger logger= LoggerFactory.getLogger(AuthController.class);
     @Autowired
     private UserDao userDao;
-
     @Autowired
     private RoleDao roleDao;
-
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
     @Autowired
     private UserRepo myUserRepo;
-
+    @Autowired
+    private MoneyTransactionsDao myMoneyTransactionDAO;
 
     @Override
     @Transactional
@@ -97,5 +97,11 @@ public class UserServiceImpl implements UserService {
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public MyUserDetails getMyuserDetailsByUsername(String username){
+
+        return userDao.getMyuserDetailsByUsername(username);
     }
 }

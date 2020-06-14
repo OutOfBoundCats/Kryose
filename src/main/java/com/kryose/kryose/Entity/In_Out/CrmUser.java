@@ -1,4 +1,4 @@
-package com.kryose.kryose.Entity;
+package com.kryose.kryose.Entity.In_Out;
 
 
 

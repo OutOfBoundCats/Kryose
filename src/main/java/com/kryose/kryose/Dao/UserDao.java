@@ -2,6 +2,7 @@ package com.kryose.kryose.Dao;
 
 
 import com.kryose.kryose.Controller.AuthController;
+import com.kryose.kryose.Entity.MyUserDetails;
 import com.kryose.kryose.Entity.User;
 import org.hibernate.Session;
 import org.slf4j.Logger;
@@ -62,6 +63,24 @@ public class UserDao {
         currectSession.delete(myUser);
 
         return myUser;
+    }
+
+    public MyUserDetails getMyuserDetailsByUsername(String username){
+
+        MyUserDetails myUserDetails = null;
+        Session currectSession=myEntityManager.unwrap(Session.class);
+        Query<MyUserDetails> theQuery = currectSession.createQuery("from MyUserDetails where userName=:uName", MyUserDetails.class);
+        theQuery.setParameter("uName", username);
+        User myUser = null;
+        try {
+            logger.error("executing delete query");
+            myUserDetails = theQuery.getSingleResult();
+        } catch (Exception e) {
+            myUser = null;
+        }
+
+
+        return myUserDetails;
     }
 
 

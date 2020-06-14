@@ -2,6 +2,7 @@ package com.kryose.kryose.Entity;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="user_details")
@@ -23,6 +24,10 @@ public class MyUserDetails {
     @JoinColumn(name = "resource_id")
     private Resource myResource;
 
+    @OneToMany(mappedBy = "user_details_id",fetch = FetchType.LAZY)
+    private List<MoneyTransactions> myMoneyTransactions;
+
+
 
 
     public MyUserDetails(String userName) {
@@ -31,6 +36,18 @@ public class MyUserDetails {
 
     public MyUserDetails() {
     }
+
+    public List<MoneyTransactions> getMyMoneyTransactions() {
+        return myMoneyTransactions;
+    }
+
+    public void setMyMoneyTransactions(List<MoneyTransactions> myMoneyTransactions) {
+        this.myMoneyTransactions = myMoneyTransactions;
+    }
+    public void addMyMoneyTransactions(MoneyTransactions myMoneyTransactions) {
+        this.myMoneyTransactions.add(myMoneyTransactions);
+    }
+
     public User getMyuser() {
         return myuser;
     }
