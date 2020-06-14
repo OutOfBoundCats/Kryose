@@ -34,8 +34,8 @@ public class Payment {
     }
 
     @PostMapping("/makePayment")
-    public String makePayment(@RequestBody MoneyPayment_In myMoneyPayement, HttpServletRequest request){
-
+    public String makePayment( HttpServletRequest request){
+        //@RequestBody MoneyPayment_In myMoneyPayement,
         String username = null;
         String jwt = null;
         final String authorizationHeader = request.getHeader("Authorization");

@@ -20,11 +20,11 @@ public class MyUserDetails {
     @OneToOne(mappedBy = "myUserDetauilsID",fetch = FetchType.LAZY)
     private User myuser;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "resource_id")
     private Resource myResource;
 
-    @OneToMany(mappedBy = "user_details_id",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userDetailsID",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<MoneyTransactions> myMoneyTransactions;
 
 
@@ -45,6 +45,9 @@ public class MyUserDetails {
         this.myMoneyTransactions = myMoneyTransactions;
     }
     public void addMyMoneyTransactions(MoneyTransactions myMoneyTransactions) {
+        if(myMoneyTransactions==null){
+            myMoneyTransactions= new MoneyTransactions();
+        }
         this.myMoneyTransactions.add(myMoneyTransactions);
     }
 

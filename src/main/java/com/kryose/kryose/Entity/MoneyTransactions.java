@@ -13,9 +13,13 @@ public class MoneyTransactions {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_details_id",referencedColumnName = "id")
+//    private MyUserDetails user_details_id;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_details_id")
-    private MyUserDetails user_details_id;
+    private MyUserDetails userDetailsID;
 
     @Column(name = "amount")
     private int amount;
@@ -43,6 +47,14 @@ public class MoneyTransactions {
         this.current_plan_surcharge = current_plan_surcharge;
     }
 
+    public MyUserDetails getUserDetailsID() {
+        return userDetailsID;
+    }
+
+    public void setUserDetailsID(MyUserDetails userDetailsID) {
+        this.userDetailsID = userDetailsID;
+    }
+
     public Long getId() {
         return id;
     }
@@ -51,13 +63,7 @@ public class MoneyTransactions {
         this.id = id;
     }
 
-    public MyUserDetails getUser_details_id() {
-        return user_details_id;
-    }
 
-    public void setUser_details_id(MyUserDetails user_details_id) {
-        this.user_details_id = user_details_id;
-    }
 
     public int getAmount() {
         return amount;
@@ -105,5 +111,19 @@ public class MoneyTransactions {
 
     public void setCurrent_plan_surcharge(int current_plan_surcharge) {
         this.current_plan_surcharge = current_plan_surcharge;
+    }
+
+    @Override
+    public String toString() {
+        return "MoneyTransactions{" +
+                "id=" + id +
+                ", user_details_id=" + userDetailsID +
+                ", amount=" + amount +
+                ", username='" + username + '\'' +
+                ", transactionDate=" + transactionDate +
+                ", info='" + info + '\'' +
+                ", credits_deposited=" + credits_deposited +
+                ", current_plan_surcharge=" + current_plan_surcharge +
+                '}';
     }
 }

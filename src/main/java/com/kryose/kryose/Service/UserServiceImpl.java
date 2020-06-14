@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
         //set Resource Details
         myResource=new Resource( Long.valueOf(0),crmUser.getUserName(),null,null,"Welcome",Long.valueOf(0),Long.valueOf(0),Long.valueOf(0));
         myUSerDetails.setMyResource(myResource);
+        logger.error(String.valueOf(myUSerDetails));
 
 
         logger.error("calling DAO save method");
